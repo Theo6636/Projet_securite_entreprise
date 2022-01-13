@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Display all records from Database</title>
+  <title>Clients</title>
 </head>
 <body>
 
-<h2>Employee Details</h2>
+<h2>Liste des clients</h2>
 
 <table border="2">
   <tr>
-    <td>Sr.No.</td>
-    <td>Nom du produit</td>
-    <td>Quantité en stock</td>
+    <td>Nom</td>
+    <td>Prenom</td>
+    <td>Adresse</td>
+    <td>Adresse mail</td>
   </tr>
 
 <?php
 
 include "dbConn.php"; // Using database connection file here
 
-$records = mysqli_query($db,"select * from produit"); // fetch data from database
+$records = mysqli_query($db,"select * from client"); // fetch data from database
 
 while($data = mysqli_fetch_array($records))
 {
 ?>
   <tr>
-    <td><?php echo $data['id']; ?></td>
     <td><?php echo $data['nom']; ?></td>
-    <td><?php echo $data['quantite_en_stock']; ?></td>
+    <td><?php echo $data['prenom']; ?></td>
+    <td><?php echo $data['adresse']; ?></td>
+    <td><?php echo $data['mail']; ?></td>
   </tr>	
 <?php
 }

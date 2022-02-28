@@ -8,7 +8,7 @@
 <?php
 include "dbConn.php"; // Using database connection file here
 
-if(isset($_POST['submit']))
+if(isset($_POST['validation']))
 {		
     $quantite = intval($_POST['quantite']);
     $produit = intval($_POST['produitlist']);
@@ -69,7 +69,7 @@ while($throw_client = mysqli_fetch_array($fetch_client)) {
 mysqli_close($db); // Close connection
   ?>
   <br/>
-  <input type="submit" name="submit" value="Envoyer">
+  <input type="submit" name="validation" value="Envoyer">
 </form>
 
 </body>

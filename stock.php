@@ -18,6 +18,20 @@
 <?php
 
 include "dbConn.php"; // Using database connection file here
+if(isset($_POST['validation']))
+{   
+    $insert = mysqli_query($db,"UPDATE `produit` SET `quantité_en_stock`= `quantité_en_stock`+'15' WHERE `nom`='boite noire'");
+
+    if(!$insert)
+    {
+        echo mysqli_error($db);
+    }
+    else
+    {
+        echo "Records added successfully.";
+    }
+}
+
 
 $records = mysqli_query($db,"select * from produit"); // fetch data from database
 
@@ -37,6 +51,7 @@ while($data = mysqli_fetch_array($records))
 </table>
 <button onClick="plusBoiteBlanche()">+5 boites blanches</button>
 <div>+5 boites noires</div>
+<input type="submit" name="validation" value="Envoyer">
 
 <?php mysqli_close($db); // Close connection ?>
 

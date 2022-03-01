@@ -6,7 +6,7 @@
 <body>
 
 <h2>Stock</h2>
-<a href="index.php?page=main">Retour à l'accueil</a>
+<a href="index.php">Retour à l'accueil</a>
 <table border="2">
   <tr>
     <td>Sr.No.</td>
@@ -20,7 +20,7 @@
 include "dbConn.php"; // Using database connection file here
 if(isset($_POST['validation']))
 {   
-    $insert = mysqli_query($db,"UPDATE `produit` SET `quantité_en_stock`= `quantité_en_stock`+'15' WHERE `nom`='boite noire'");
+    $insert = mysqli_query($db,"UPDATE `produit` SET `quantite_en_stock`= `quantite_en_stock`+'100' WHERE `nom`='boite noire'");
 
     if(!$insert)
     {
@@ -49,11 +49,13 @@ while($data = mysqli_fetch_array($records))
 }
 ?>
 </table>
-<button onClick="plusBoiteBlanche()">+5 boites blanches</button>
+<button name="plusBoiteBlanche">+5 boites blanches</button>
 <div>+5 boites noires</div>
+<form method="post">
+
 <input type="submit" name="validation" value="Envoyer">
+</form>
 
 <?php mysqli_close($db); // Close connection ?>
-
 </body>
 </html>

@@ -47,7 +47,7 @@ $fetch_produit = mysqli_query($db,"SELECT id,nom FROM produit");
 
 
 while($throw_produit = mysqli_fetch_array($fetch_produit)) {
-echo '<option   value=\"'.$throw_produit[0].'">'.$throw_produit[1].'</option>';
+echo '<option   value="'.$throw_produit[0].'">'.$throw_produit[1].'</option>';
 }
 echo "</select>";
 
@@ -63,7 +63,7 @@ include "dbConn.php"; // Using database connection file here
 
 $fetch_client = mysqli_query($db,"SELECT id,nom,prenom FROM client");
 while($throw_client = mysqli_fetch_array($fetch_client)) {
-  echo '<option   value=\"'.$throw_client[0].'">'.$throw_client[1],' ',$throw_client[2].'</option>';
+  echo '<option   value="'.$throw_client[0].'">'.$throw_client[1],' ',$throw_client[2].'</option>';
   }
   echo "</select>";
 mysqli_close($db); // Close connection

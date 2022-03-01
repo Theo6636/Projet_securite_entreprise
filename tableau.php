@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Clients</title>
+  <title>Commandes</title>
 </head>
 <body>
 
@@ -10,10 +10,13 @@
 <table border="2">
   <tr><td>commande en attente d'action</td></tr>
   <tr>
+    <td>id</td>    
     <td>Nom</td>
     <td>Prenom</td>
     <td>Adresse</td>
     <td>Adresse mail</td>
+    <td>Statut</td>
+    <td>Action</td>
   </tr>
 
 <?php
@@ -27,8 +30,12 @@ while($data = mysqli_fetch_array($records))
 ?>
   <tr>
     <td><?php echo $data['id']; ?></td>
+    <td>Nom</td>
+    <td>Prenom</td>
+    <td>adresse</td>
+    <td>mail</td>
     <td><?php echo $data['statut']; ?></td>
-    <td><?php echo $data['facturation']; ?></td>
+    <td>test</td>
   </tr>	
 <?php
 }

@@ -44,7 +44,6 @@
         if ($_SESSION["role"]=='chef'){
         	?>
         	<a href='stock.php'><span>Stock</span></a>
-        	<a href='tableau.php'><span>Tableau</span></a>
         	<a href='create_commande.php'><span>Créer une commande</span></a>
         	<a href='clients.php'><span>Liste des clients</span></a>
         	<a href='gestionboite.php'><span>Gestion des stocks</span></a>
@@ -52,28 +51,29 @@
         	<?php
         	include("tableau.php");
         }  
-        elseif ($_SESSION["role"]=='marketing') {
+        elseif ($_SESSION["role"]=='commercial') {
         	?>
-        	<a href='create_commande.php'><span>Créer une commande</span></a>
+        	
         	<a href='clients.php'><span>Liste des clients</span></a>
         	<?php
-        	
+        	include("tableau.php");
+        	include("create_commande.php");
+
         }
         elseif ($_SESSION["role"]=='logisticien') {
-        	?>
-        	<a href='stock.php'><span>Stock</span></a>
-        	<?php
+        	include("tableau.php");
         }
         elseif ($_SESSION["role"]=='respoProd') {
         	?>
         	<a href='stock.php'><span>Stock</span></a>
         	<a href='tableau.php'><span>Tableau</span></a>
         	<?php
+        	
+        	include("tableau.php");
+        	include("stock.php");
         }
         elseif ($_SESSION["role"]=='comptable') {
-        	?>
-        	<a href='facture.php'><span>Les factures</span></a>
-        	<?php
+        	include("facture.php");
         }
             
     }else{

@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Clients</title>
+  <a href="index.php">Retour à l'accueil</a>
 </head>
 <body>
 

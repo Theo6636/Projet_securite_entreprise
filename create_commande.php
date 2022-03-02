@@ -14,10 +14,9 @@ if(isset($_POST['validation']))
     $produit = intval($_POST['produitlist']);
     $statut = 'Created';
     $facturation = '0';
-    $id_commande = '2';
+    $id_commande = intval($_POST['id_commande']);
     $id_client = intval($_POST['clientlist']);
     $id_metier_en_charge = '1';
-    $id = '1';
 
     $insert = mysqli_query($db,"INSERT INTO `commande`(`statut`,`facturation`,`id_commande`,`id_client`,`id_metier_en_charge`,`quantite`, `id_produit`) VALUES ('$statut','$facturation','$id_commande','$id_client','$id_metier_en_charge','$quantite','$produit')");
 
@@ -37,7 +36,10 @@ if(isset($_POST['validation']))
 <h3>Creation de commande</h3>
 
 <form method="POST">
+  ID de la commande : <input type="number" name="id_commande"  Required>
+  <br/>
   Produit : 
+
 
   <select name="produitlist">;
 <?php

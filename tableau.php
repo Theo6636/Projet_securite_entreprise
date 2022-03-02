@@ -5,9 +5,10 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
-function update(id_com,id_prod,qte,action) {
-  console.log(id_com,id_prod,qte,action);
+function update(id_com,id_prod,qte,action,stock_n=0,stock_b=0) {
+  console.log(id_com,id_prod,qte,action,(stock_n-qte<0),stock_b);
   if(action=='Produire'){
+    if((id_prod == 'boite noire' && (stock_n-qte)>0) || (id_prod == 'boite blanche' && (stock_b-qte)>0)){
   $.ajax({
     url: "ajax.php",
     method: "POST",
@@ -21,7 +22,13 @@ function update(id_com,id_prod,qte,action) {
     success: function(response) {
       alerte(response);
     }
-});}
+});
+  location.reload();
+}
+  else{
+    alert("Stock insuffisant !");
+  }
+}
   else if(action=='Livrer'){
   $.ajax({
     url: "ajax.php",
@@ -71,6 +78,11 @@ include "dbConn.php"; // Using database connection file here
 
 $records = mysqli_query($db,"select * from (commande inner join client on client.id = commande.id_client) inner join produit on produit.id=commande.id_produit"); // fetch data from database
 
+$check_qte_1 = mysqli_query($db,"select quantite_en_stock,nom from produit where nom='boite noire'");
+$check_qte_2 = mysqli_query($db,"select quantite_en_stock,nom from produit where nom='boite blanche'");
+$check_noire= mysqli_fetch_array($check_qte_1);
+$check_blanche= mysqli_fetch_array($check_qte_2);
+
 while($data = mysqli_fetch_array($records))
 {if ($_SESSION["role"]=='commercial'){
   if ($data['statut']=='Created'){
@@ -102,7 +114,7 @@ elseif ($_SESSION["role"]=='respoProd'){
     <td><?php echo $data['nom']; ?></td>
     <td><?php echo $data['quantite']; ?></td>
     <td><?php $produire="'Produire'";
-    echo '<button type="button" onclick="update('.$data[0].','."'".$data['nom']."'".','.$data['quantite'].','.$produire.')" > Producted </button>'; ?></td>
+    echo '<button type="button" onclick="update('.$data[0].','."'".$data['nom']."'".','.$data['quantite'].','.$produire.','.$check_noire[0].','.$check_blanche[0].')" > Producted </button>'; ?></td>
   </tr> 
 <?php
 }}

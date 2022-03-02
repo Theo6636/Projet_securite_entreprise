@@ -11,7 +11,7 @@ $commande = $_POST['id_commande'];
 $produit = $_POST['nom_produit'];
 $quantite = $_POST['quantite'];
 $del_stock="UPDATE produit SET quantite_en_stock= quantite_en_stock-'".$quantite."' WHERE nom='".$produit."'";
-$producted="UPDATE commande SET statut='Producted' WHERE id_commande='".$commande."'";
+$producted="UPDATE commande SET statut='Producted' WHERE id='".$commande."'";
 
 
 $result2 = mysqli_query($db,$producted);

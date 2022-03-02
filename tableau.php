@@ -77,7 +77,7 @@ while($data = mysqli_fetch_array($records))
 ?>
   <tr>
     <td><?php echo $data[0]; ?></td>
-    <td><?php echo $data['id']; ?></td>
+    <td><?php echo $data[3]; ?></td>
     <td><?php echo $data[9]; ?></td>
     <td><?php echo $data['prenom']; ?></td>
     <td><?php echo $data['adresse']; ?></td>
@@ -93,7 +93,7 @@ elseif ($_SESSION["role"]=='respoProd'){
 ?>
   <tr>
     <td><?php echo $data[0]; ?></td>
-    <td><?php echo $data['id']; ?></td>
+    <td><?php echo $data[3]; ?></td>
     <td><?php echo $data[9]; ?></td>
     <td><?php echo $data['prenom']; ?></td>
     <td><?php echo $data['adresse']; ?></td>
@@ -102,7 +102,7 @@ elseif ($_SESSION["role"]=='respoProd'){
     <td><?php echo $data['nom']; ?></td>
     <td><?php echo $data['quantite']; ?></td>
     <td><?php $produire="'Produire'";
-    echo '<button type="button" onclick="update('.$data['id_commande'].','."'".$data['nom']."'".','.$data['quantite'].','.$produire.')" > Producted </button>'; ?></td>
+    echo '<button type="button" onclick="update('.$data[0].','."'".$data['nom']."'".','.$data['quantite'].','.$produire.')" > Producted </button>'; ?></td>
   </tr> 
 <?php
 }}
@@ -111,15 +111,17 @@ elseif ($_SESSION["role"]=='logisticien'){
   if ($data['statut']=='Producted'){
 ?>
   <tr>
-    <td><?php echo $data['id_commande']; ?></td>
-    <td><?php echo $data['nom']; ?></td>
+    <td><?php echo $data[0]; ?></td>
+    <td><?php echo $data[3]; ?></td>
+    <td><?php echo $data[9]; ?></td>
     <td><?php echo $data['prenom']; ?></td>
     <td><?php echo $data['adresse']; ?></td>
     <td><?php echo $data['mail']; ?></td>
     <td><?php echo $data['statut']; ?></td>
+    <td><?php echo $data['nom']; ?></td>
     <td><?php echo $data['quantite']; ?></td>
     <td><?php $livrer="'Livrer'";
-    echo '<button type="button" onclick="update('.$data['id_commande'].','."'".$data['nom']."'".','.$data['quantite'].','.$livrer.')" > Livrer </button>'; ?></td>
+    echo '<button type="button" onclick="update('.$data[3].','."'".$data['nom']."'".','.$data['quantite'].','.$livrer.')" > Livrer </button>'; ?></td>
   </tr> 
 <?php
 }}

@@ -19,15 +19,8 @@ if(isset($_POST['validation']))
     $id_metier_en_charge = '1';
 
     $insert = mysqli_query($db,"INSERT INTO `commande`(`statut`,`facturation`,`id_commande`,`id_client`,`id_metier_en_charge`,`quantite`, `id_produit`) VALUES ('$statut','$facturation','$id_commande','$id_client','$id_metier_en_charge','$quantite','$produit')");
+    header("Refresh: 0;");
 
-    if(!$insert)
-    {
-        echo mysqli_error($db);
-    }
-    else
-    {
-        echo "Records added successfully.";
-    }
 }
 
 

@@ -8,7 +8,7 @@
 function update(id_com,id_prod,qte,action,stock_n=0,stock_b=0) {
   console.log(id_com,id_prod,qte,action,(stock_n-qte<0),stock_b);
   if(action=='Produire'){
-    if((id_prod == 'boite noire' && (stock_n-qte)>0) || (id_prod == 'boite blanche' && (stock_b-qte)>0)){
+    if((id_prod == 'boite noire' && (stock_n-qte)>=0) || (id_prod == 'boite blanche' && (stock_b-qte)>=0)){
   $.ajax({
     url: "ajax.php",
     method: "POST",
@@ -30,6 +30,29 @@ function update(id_com,id_prod,qte,action,stock_n=0,stock_b=0) {
   }
 }
   else if(action=='Livrer'){
+    if(stock_n == 1){
+      $.ajax({
+        url: "ajax.php",
+        method: "POST",
+        dataType: 'json',
+        data:{
+        "id_commande": id_com,
+        "nom_produit" : id_prod,
+        "quantite"  : qte,
+        "action" : action
+        },
+      success: function(response) {
+      alerte(response);
+      }
+    });
+    }
+    else{
+      alert("Commande non facturée !");
+    }
+    location.reload();
+  }
+
+else if(action=='facturer'){
   $.ajax({
     url: "ajax.php",
     method: "POST",
@@ -43,7 +66,9 @@ function update(id_com,id_prod,qte,action,stock_n=0,stock_b=0) {
     success: function(response) {
       alerte(response);
     }
-});}
+});
+  location.reload();
+}
 };
 </script>
 
@@ -66,7 +91,11 @@ function update(id_com,id_prod,qte,action,stock_n=0,stock_b=0) {
     <td>Statut</td>
     <td>Produit</td>
     <td>Quantité</td>
-    <?php if($_SESSION["role"]=='respoProd' || $_SESSION["role"]=='logisticien'){ 
+    <?php if($_SESSION["role"]=='logisticien' || $_SESSION["role"]=='comptable'){ 
+    ?>
+    <td>Facturation</td>
+  <?php }?>
+    <?php if($_SESSION["role"]=='respoProd' || $_SESSION["role"]=='logisticien' || $_SESSION["role"]=='comptable'){ 
     ?>
     <td>Action</td>
   <?php }?>
@@ -97,6 +126,7 @@ while($data = mysqli_fetch_array($records))
     <td><?php echo $data['statut']; ?></td>
     <td><?php echo $data['nom']; ?></td>
     <td><?php echo $data['quantite']; ?></td>
+
   </tr>	
 <?php
 }}
@@ -132,12 +162,43 @@ elseif ($_SESSION["role"]=='logisticien'){
     <td><?php echo $data['statut']; ?></td>
     <td><?php echo $data['nom']; ?></td>
     <td><?php echo $data['quantite']; ?></td>
+    <td><?php if ($data['facturation']){
+    echo "Facturée";}
+    else{
+      echo "Non facturée";
+    } ?></td>
     <td><?php $livrer="'Livrer'";
     echo '<button type="button" onclick="update('.$data[3].','."'".$data['nom']."'".','.$data['quantite'].','.$livrer.')" > Livrer </button>'; ?></td>
   </tr> 
 <?php
 }}
 
+elseif ($_SESSION["role"]=='comptable'){
+  if ($data['statut']!='Delivered'){
+?>
+  <tr>
+    <td><?php echo $data[0]; ?></td>
+    <td><?php echo $data[3]; ?></td>
+    <td><?php echo $data[9]; ?></td>
+    <td><?php echo $data['prenom']; ?></td>
+    <td><?php echo $data['adresse']; ?></td>
+    <td><?php echo $data['mail']; ?></td>
+    <td><?php echo $data['statut']; ?></td>
+    <td><?php echo $data['nom']; ?></td>
+    <td><?php echo $data['quantite']; ?></td>
+    <td><?php if ($data['facturation']){
+    echo "Facturée";}
+    else{
+      echo "Non facturée";
+    } ?></td>
+    <td><?php ;
+    if($data['facturation']==0){
+      $facturer="'facturer'";
+    echo '<button type="button" onclick="update('.$data[3].','."'".$data['nom']."'".','.$data['quantite'].','.$facturer.')" > Facturer </button>'; }?></td>
+  </tr> 
+<?php
+}
+}
 }
 ?>
 </table>

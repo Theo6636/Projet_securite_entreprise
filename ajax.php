@@ -47,6 +47,25 @@ if(!$result)
     }
 //	echo "C'est fait ".$producted;
 }
+elseif($action=='facturer'){
+
+$commande = $_POST['id_commande'];
+
+$factured="UPDATE commande SET facturation='1' WHERE id_commande='".$commande."'";
+
+
+$result = mysqli_query($db,$factured);
+
+if(!$result)
+    {
+        echo mysqli_error($db);
+    }
+    else
+    {
+        echo "Records added successfully.";
+    }
+//	echo "C'est fait ".$producted;
+}
 mysqli_close($db);
 }
 

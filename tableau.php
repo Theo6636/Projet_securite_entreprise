@@ -77,10 +77,10 @@ else if(action=='facturer'){
 </head>
 <body>
 
-<h2>Liste des commandes</h2>
+<h2>Liste des commandes en cours</h2>
 
 <table border="2">
-  <tr><td>Commandes en attente d'action</td></tr>
+  <tr>Commandes en attente d'action :</tr>
   <tr>
     <td>ID</td> 
     <td>ID de la commande</td>   
@@ -115,6 +115,7 @@ $check_blanche= mysqli_fetch_array($check_qte_2);
 while($data = mysqli_fetch_array($records))
 {if ($_SESSION["role"]=='commercial'){
   if ($data['statut']=='Created'){
+    
 ?>
   <tr>
     <td><?php echo $data[0]; ?></td>

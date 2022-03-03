@@ -74,7 +74,6 @@
         }
         elseif ($_SESSION["role"]=='comptable') {
         	include("tableau.php");
-        	include("facture.php");
         }
             
     }else{

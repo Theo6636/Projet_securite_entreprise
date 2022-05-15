@@ -1,6 +1,11 @@
-</head>
+<head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="style.css" />
+     </head>
+
 
 <body>
+<div id="bg"></div>
  <?php
     include("dbConn.php");
     session_start();
@@ -79,11 +84,17 @@
     }else{
         //Pas connecté
     ?>
-    <form method="POST" >
-        <input type="text" name="name" placeholder="name"/>
-        <input type="password" name="psw" placeholder="mot de passe"/>
-        <input type="submit" value="Valider" name="submit"/>
-    </form>
+        <form method="POST" >
+            <div class="form-field">
+                <input type="text" name="name" placeholder="name"/>
+            </div>
+            <div class="form-field">
+                <input type="password" name="psw" placeholder="mot de passe"/>
+            </div>
+            <div class="form-field">
+                <input type="submit" value="Valider" name="submit"/>
+            </div>
+        </form>
     <?php
     }
  ?>

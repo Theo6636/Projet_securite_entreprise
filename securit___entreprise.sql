@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 01 mars 2022 à 14:50
+-- Généré le : lun. 16 mai 2022 à 11:29
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -65,16 +65,19 @@ CREATE TABLE IF NOT EXISTS `commande` (
   KEY `id_produit` (`id_produit`),
   KEY `id_client` (`id_client`),
   KEY `id_metier_en_charge` (`id_metier_en_charge`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `commande`
 --
 
 INSERT INTO `commande` (`id`, `statut`, `facturation`, `id_commande`, `quantite`, `id_produit`, `id_client`, `id_metier_en_charge`) VALUES
-(20, 'Created', 0, 2, 103, 2, 2, 1),
-(21, 'Created', 0, 3, 104, 1, 1, 1),
-(22, 'Created', 0, 4, 1, 1, 1, 1);
+(54, 'Created', 1, 2, 104, 1, 2, 1),
+(53, 'Producted', 1, 1, 103, 2, 1, 1),
+(52, 'Delivered', 1, 1, 102, 1, 1, 1),
+(51, 'Delivered', 1, 2, 200, 1, 2, 1),
+(50, 'Delivered', 1, 1, 101, 2, 1, 1),
+(49, 'Delivered', 1, 1, 100, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -115,6 +118,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(255) NOT NULL,
   `quantite_en_stock` int(11) NOT NULL,
+  `mis_en_prod` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
@@ -122,9 +126,9 @@ CREATE TABLE IF NOT EXISTS `produit` (
 -- Déchargement des données de la table `produit`
 --
 
-INSERT INTO `produit` (`id`, `nom`, `quantite_en_stock`) VALUES
-(1, 'boite noire', 530),
-(2, 'boite blanche', 15);
+INSERT INTO `produit` (`id`, `nom`, `quantite_en_stock`, `mis_en_prod`) VALUES
+(1, 'boite noire', 0, 0),
+(2, 'boite blanche', 1521, 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

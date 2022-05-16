@@ -14,19 +14,21 @@
         $psw = htmlspecialchars($_POST["psw"]);
         $name = htmlspecialchars($_POST["name"]);
 
-        $req = $db->prepare("SELECT count(*) as count, role FROM metiers where username=? && mot_de_passe=?");
-		
-		
-        $req->bind_param('ss', $name, $psw);
-        $req->execute();
-        $res = $req->get_result();
-        $account = $res->fetch_assoc();
-
+        $sql = "SELECT count(*) as count, role FROM metiers where username = ? && mot_de_passe = ?";
+        if($req = $db->prepare("SELECT count(*) as count, role FROM metiers where username = ? && mot_de_passe = ?")) { // assuming $mysqli is the connection
+            $req->bind_param("ss", $name, $psw);
+            $req->execute();
+            $res = $req->get_result();
+            $account = $res->fetch_assoc();
         if($account['count'] == 1){
             
             $_SESSION["role"] = $account["role"];
             // header("Refresh:0");
         }
+        } else {
+    $error = $db->errno . ' ' . $db->error;
+    echo $error; // 1054 Unknown column 'foo' in 'field list'
+}
     }
 
     if(isset($_SESSION["role"])){

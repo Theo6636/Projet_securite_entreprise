@@ -85,6 +85,8 @@
     }else{
         //Pas connecté
     ?>
+    <div class="box-login">
+        <div class="titre-login">Login</div>
         <form method="POST" >
             <div class="form-field">
                 <input type="text" name="name" placeholder="name"/>

@@ -4,7 +4,8 @@
      </head>
 
 
-<body>
+<body class="body-index">
+
 <div id="bg"></div>
  <?php
     include("dbConn.php");

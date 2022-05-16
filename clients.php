@@ -2,19 +2,25 @@
 <html>
 <head>
   <title>Clients</title>
-  <a href="index.php">Retour à l'accueil</a>
+  <a class="retour" href="index.php">Retour à l'accueil</a>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="body-client">
+<div id="bg"></div>
 
-<h2>Liste des clients</h2>
 
-<table border="2">
-  <tr>
-    <td>Nom</td>
-    <td>Prenom</td>
-    <td>Adresse</td>
-    <td>Adresse mail</td>
-  </tr>
+
+
+  <h2 class="titre">Liste des clients</h2>
+  <div class="box-client">
+    <table border="2">
+      <tr>
+        <td>Nom</td>
+        <td>Prenom</td>
+        <td>Adresse</td>
+        <td>Adresse mail</td>
+      </tr>
+  </div>
 
 <?php
 

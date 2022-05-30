@@ -29,7 +29,7 @@ if(isset($_POST['validation']))
 <h3>Creation de commande</h3>
 
 <form method="POST">
-  ID de la commande : <input type="number" name="id_commande"  Required>
+  ID de la commande : <input type="number" name="id_commande" class="button-create" Required>
   <br/>
   Produit : 
 
@@ -49,7 +49,7 @@ echo "</select>";
 mysqli_close($db); // Close connection
 ?>
   <br/>
-  Quantite : <input type="number" name="quantite"  Required>
+  Quantite : <input type="number" name="quantite"  class="button-create" Required>
   <br/>
   Client : 
   <select name="clientlist">;
@@ -64,7 +64,7 @@ while($throw_client = mysqli_fetch_array($fetch_client)) {
 mysqli_close($db); // Close connection
   ?>
   <br/>
-  <input type="submit" name="validation" value="Envoyer">
+  <input type="submit" name="validation" value="Envoyer" class="button-send">
 </form>
 
 </body>

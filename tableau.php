@@ -30,7 +30,6 @@ function update(id_com,id_prod,qte,action,stock_n=0,stock_b=0) {
   }
 }
   else if(action=='Livrer'){
-    if(stock_n == 1){
       $.ajax({
         url: "ajax.php",
         method: "POST",
@@ -45,10 +44,6 @@ function update(id_com,id_prod,qte,action,stock_n=0,stock_b=0) {
       alerte(response);
       }
     });
-    }
-    else{
-      alert("Commande non facturée !");
-    }
     location.reload();
   }
 
@@ -91,7 +86,7 @@ else if(action=='facturer'){
     <td>Statut</td>
     <td>Produit</td>
     <td>Quantité</td>
-    <?php if($_SESSION["role"]=='logisticien' || $_SESSION["role"]=='comptable'){ 
+    <?php if($_SESSION["role"]=='logisticien' || $_SESSION["role"]=='comptable' || $_SESSION["role"]=='chef'){ 
     ?>
     <td>Facturation</td>
   <?php }?>
@@ -131,10 +126,32 @@ while($data = mysqli_fetch_array($records))
   </tr>	
 <?php
 }}
+elseif ($_SESSION["role"]=='chef'){
+    
+?>
+  <tr>
+    <td><?php echo $data[0]; ?></td>
+    <td><?php echo $data[3]; ?></td>
+    <td><?php echo $data[9]; ?></td>
+    <td><?php echo $data['prenom']; ?></td>
+    <td><?php echo $data['adresse']; ?></td>
+    <td><?php echo $data['mail']; ?></td>
+    <td><?php echo $data['statut']; ?></td>
+    <td><?php echo $data['nom']; ?></td>
+    <td><?php echo $data['quantite']; ?></td>
+    <td><?php if ($data['facturation']){
+    echo "Facturée";}
+    else{
+      echo "Non facturée";
+    } ?></td>
+
+  </tr>	
+<?php
+}
 elseif ($_SESSION["role"]=='respoProd'){
   if ($data['statut']=='Created'){
 ?>
-  <tr>
+  <tr> 
     <td><?php echo $data[0]; ?></td>
     <td><?php echo $data[3]; ?></td>
     <td><?php echo $data[9]; ?></td>
@@ -151,7 +168,7 @@ elseif ($_SESSION["role"]=='respoProd'){
 }}
 
 elseif ($_SESSION["role"]=='logisticien'){
-  if ($data['statut']=='Producted'){
+  if ($data['statut']=='Producted' && $data['facturation']==1){
 ?>
   <tr>
     <td><?php echo $data[0]; ?></td>

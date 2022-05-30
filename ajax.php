@@ -5,6 +5,8 @@ if(isset($_POST['action'])){
 	include("dbConn.php");
 $action=$_POST['action'];
 echo $action;
+
+//Production
 	if($action=='Produire'){
 
 $commande = $_POST['id_commande'];
@@ -15,7 +17,6 @@ $producted="UPDATE commande SET statut='Producted' WHERE id='".$commande."'";
 
 
 $result2 = mysqli_query($db,$producted);
-//$result = mysqli_query($db,$del_stock);
 $test = mysqli_query($db,$del_stock);
 
 if(!$result2)
@@ -26,13 +27,13 @@ if(!$result2)
     {
         echo "Records added successfully.";
     }
-//	echo "C'est fait ".$producted;
 }
+//Livraison
 elseif($action=='Livrer'){
 
 $commande = $_POST['id_commande'];
 
-$delivered="UPDATE commande SET statut='Delivered' WHERE id_commande='".$commande."'";
+$delivered="UPDATE commande SET statut='Delivered' WHERE id_commande=".$commande."";
 
 
 $result = mysqli_query($db,$delivered);
@@ -45,8 +46,10 @@ if(!$result)
     {
         echo "Records added successfully.";
     }
-//	echo "C'est fait ".$producted;
+
 }
+
+//Facturation
 elseif($action=='facturer'){
 
 $commande = $_POST['id_commande'];
@@ -64,7 +67,6 @@ if(!$result)
     {
         echo "Records added successfully.";
     }
-//	echo "C'est fait ".$producted;
 }
 mysqli_close($db);
 }

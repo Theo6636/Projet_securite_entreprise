@@ -6,13 +6,12 @@
 <body>
 
 <h2>Stock</h2>
-<a href="index.php">Retour à l'accueil</a>
 <table border="2">
   <tr>
     <td>Sr.No.</td>
     <td>Nom du produit</td>
     <td>Quantité en stock</td>
-    <td>mise en production supplementaire</td>
+    <td>Mise en production supplementaire</td>
   </tr>
 
 <?php
@@ -28,7 +27,7 @@ if(isset($_POST['plusBoiteNoire']))
     }
     else
     {
-        echo "Records added successfully.";
+        echo "Boites noires mises en production.";
     }
 }
 if(isset($_POST['plusBoiteBlanche']))
@@ -41,7 +40,7 @@ if(isset($_POST['plusBoiteBlanche']))
     }
     else
     {
-        echo "Records added successfully.";
+        echo "Boites blanches mises en production.";
     }
 }
 if(isset($_POST['confirmer']))
@@ -54,7 +53,7 @@ if(isset($_POST['confirmer']))
     }
     else
     {
-        echo "Records added successfully.";
+        echo "Les boites ont été produites.";
     }
 }
 

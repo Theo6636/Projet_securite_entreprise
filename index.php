@@ -6,12 +6,14 @@
 
 <body class="body-index">
 
+<div class="display">
+
 <div id="bg"></div>
  <?php
     include("dbConn.php");
     session_start();
     if(isset($_POST["submit"]) && isset($_POST["name"]) && isset($_POST["psw"])){
-        $psw = htmlspecialchars($_POST["psw"]);
+        $psw = hash("sha256",htmlspecialchars($_POST["psw"]));
         $name = htmlspecialchars($_POST["name"]);
 
         $sql = "SELECT count(*) as count, role FROM metiers where username = ? && mot_de_passe = ?";
@@ -58,6 +60,7 @@
         	<a href='facture.php'><span>Les factures</span></a>
         	<?php
         	include("tableau.php");
+
         }  
         elseif ($_SESSION["role"]=='commercial') {
         	?>
@@ -71,12 +74,7 @@
         elseif ($_SESSION["role"]=='logisticien') {
         	include("tableau.php");
         }
-        elseif ($_SESSION["role"]=='respoProd') {
-        	?>
-        	<a href='stock.php'><span>Stock</span></a>
-        	<a href='tableau.php'><span>Tableau</span></a>
-        	<?php
-        	
+        elseif ($_SESSION["role"]=='respoProd') {        	
         	include("tableau.php");
         	include("stock.php");
         }
@@ -87,6 +85,7 @@
     }else{
         //Pas connecté
     ?>
+</div>
     <div class="box-login">
         <div class="titre-login">Login</div>
         <form method="POST" >
@@ -108,6 +107,7 @@
             
             
         </div>
+
 </body>
 
 </html>
